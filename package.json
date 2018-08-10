@@ -1,12 +1,12 @@
 {
-  "name": "parse-usdl",
+  "name": "@robotsandpencils/parse-usdl",
   "version": "2.0.2",
   "main": "index.js",
   "description": "parse Pdf417 barcode data from US driver licenses",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mvayngrib/parse-usdl"
+    "url": "https://github.com/robotsandpencils/parse-usdl"
   },
   "keywords": [
     "barcode",
