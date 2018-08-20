@@ -7,10 +7,10 @@ const defaultOptions = {suppressErrors: false};
 exports.parse = function parseDL(str, options = defaultOptions) {
   const props = {};
   const rawLines = str.trim().split(lineSeparator);
-  const lines = rawLines.map(rawLine => sanitizeData(rawLine));
+  const lines = rawLines.map(function(rawLine) { return sanitizeData(rawLine); });
   let started;
   let iin;
-  lines.forEach(line => {
+  lines.forEach(function(line) {
     if (!started) {
       if (line.indexOf("ANSI ") === 0) {
         started = true;
