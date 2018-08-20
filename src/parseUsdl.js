@@ -4,7 +4,8 @@ const lineSeparator = "\n";
 
 const defaultOptions = {suppressErrors: false};
 
-exports.parse = function parseDL(str, options = defaultOptions) {
+exports.parse = function parseDL(str, options) {
+  if(!options) {options = defaultOptions};
   const props = {};
   const rawLines = str.trim().split(lineSeparator);
   const lines = rawLines.map(function(rawLine) { return sanitizeData(rawLine); });
@@ -47,15 +48,15 @@ exports.parse = function parseDL(str, options = defaultOptions) {
   return props;
 };
 
-const sanitizeData = rawLine => rawLine.match(/[\011\012\015\040-\177]*/g).join('').trim();
+const sanitizeData = function(rawLine) { return rawLine.match(/[\011\012\015\040-\177]*/g).join('').trim(); };
 
-const getCode = line => line.slice(0, 3);
-const getValue = line => line.slice(3);
-const getKey = code => CodeToKey[code];
+const getCode = function(line) { return line.slice(0, 3); }
+const getValue = function(line) { return line.slice(3) }
+const getKey = function(code) { return CodeToKey[code] }
 
-const isSexField = code => code === "DBC";
+const isSexField = function(code) { return code === "DBC"};
 
-const getSex = (code, value) => {
+const getSex = function(code, value) {
   if (value === "1" || value === "M") {
     return "M";
   } else if (value === "2" || value === "F") {
@@ -64,14 +65,14 @@ const getSex = (code, value) => {
   return "X";
 };
 
-const isDateField = key => key.indexOf("date") === 0;
+const isDateField = function(key) { return key.indexOf("date") === 0; }
 
-const getDateFormatUSA = value => {
+const getDateFormatUSA = function(value) {
   const parts = [value.slice(0, 2), value.slice(2, 4), value.slice(4)];
   return parts.join("/");
 };
 
-const getDateFormatCAN = value => {
+const getDateFormatCAN = function(value) {
   const parts = [value.slice(0, 4), value.slice(4, 6), value.slice(6)];
   return parts.join("/");
 };
