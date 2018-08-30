@@ -8,6 +8,7 @@ exports.canada = {
   'dateOfExpiry': '2022/08/31',
   'documentNumber': "123456-123",
   'eyeColor': "green",
+  "issuerState": "AB",
   'hairColor': "blond",
   'firstName': "M",
   'givenName': "M Motorist",

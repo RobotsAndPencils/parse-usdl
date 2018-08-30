@@ -9,7 +9,7 @@ exports.parse = function parseDL(str, options) {
   if (!options) { options = defaultOptions };
   const props = {};
   // New line after identification number
-  str = str.replace(/(.*(?:DL|ID).[\W]?(?:DL|ID))(.*)/, "$1\n$2");
+  str = str.replace(/(.*?(?:DL|ID).*?(?:DL|ID))(.*)/, "$1\n$2");
   const rawLines = str.trim().split(lineSeparator);
   const lines = rawLines.map(function (rawLine) { return sanitizeData(rawLine); });
   let started;
@@ -19,7 +19,7 @@ exports.parse = function parseDL(str, options) {
       if (line.indexOf("ANSI ") === 0) {
         started = true;
         props["iin"] = line.slice(5, 11); // 6-digit Issuer Identification Numbers
-        props["issuer"] = issuerMap[props["iin"]] || "UNKNOWN";
+        props["issuerState"] = issuerMap[props["iin"]] || "UNKNOWN";
       }
       return;
     }
@@ -28,7 +28,7 @@ exports.parse = function parseDL(str, options) {
     let value = getValue(line);
     let key = getKey(code);
     if (!key) {
-      if (options.suppressErrors || code === "ZNZ") {
+      if (options.suppressErrors || code === "ZNZ" || code === "ZAZ") {
         return;
       } else {
         throw new Error("unknown code: " + code);
