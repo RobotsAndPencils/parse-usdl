@@ -2,11 +2,15 @@ const UsdlData1 = require('./sample/index').UsdlData1;
 const UsdlData2 = require('./sample/index').UsdlData2;
 const UsdlData3 = require('./sample/index').UsdlData3;
 const UsdlData4 = require('./sample/index').UsdlData4;
+const AlbertaData1 = require('./sample/index').AlbertaData1;
+const AlbertaData2 = require('./sample/index').AlbertaData2;
 const UsdlData_error = require('./sample/index').UsdlData_error;
 const UsdlData_invalid_characters = require('./sample/index').UsdlData_invalid_characters;
 const UsdlData_invalid_characters_2 = require('./sample/index').UsdlData_invalid_characters_2;
 const default_fixture = require('./fixtures').default;
 const canada_fixture = require('./fixtures').canada;
+const alberta1_fixture = require('./fixtures').alberta1;
+const alberta2_fixture = require('./fixtures').alberta2;
 
 const parse = require("../index").parse;
 
@@ -31,9 +35,19 @@ describe("USDL Parser", () => {
     expect(parsedData).toEqual(canada_fixture);
   });
 
+  it("should parse correct values for Alberta DL", () => {
+    const parsedData = parse(AlbertaData1);
+    expect(parsedData).toEqual(alberta1_fixture);
+  });
+
+  it("should parse correct values for Alberta ID", () => {
+    const parsedData = parse(AlbertaData2);
+    expect(parsedData).toEqual(alberta2_fixture);
+  });
+
   it("should not throw error if invalid code is passed and warming suppress is on", () => {
     function parseData() {
-      return parse(UsdlData_error, {suppressErrors: true});
+      return parse(UsdlData_error, { suppressErrors: true });
     }
 
     const parsedData = parseData();
