@@ -9,7 +9,7 @@ exports.alberta1 = {
   "dateOfExpiry": "2023/11/20",
   "dateOfIssue": "2018/05/17",
   "documentDiscriminator": "134711-320",
-  "documentNumber": "0006-81780",
+  "documentNumber": "134711-320",
   "eyeColor": "BRO",
   "firstName": "Sam",
   "firstNameTruncated": "N",

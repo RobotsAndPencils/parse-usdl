@@ -36,7 +36,15 @@ exports.parse = function parseDL(str, options) {
     }
 
     if (isSexField(code)) value = getSex(code, value);
-    props[key] = value;
+    if (!props.hasOwnProperty(key)) {
+      props[key] = value;
+    }
+
+    // In Alberta, documentDiscriminator (DCF) overrides the documentNumber (DAQ).
+    // DCF only is on the new 2018 licence.
+    if(key === "documentDiscriminator") {
+      props["documentNumber"] = value;
+    }
   });
 
   // date format depends on issuer
